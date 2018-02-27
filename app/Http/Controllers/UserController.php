@@ -6,8 +6,18 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
     public function index() {
-        return 'Usuarios';
+        $users = [
+            'Jeremy',
+            'Deivis',
+            'Jani',
+            'Alvaro',
+            'Janer',
+            '<script>alert("Click");</script>'
+        ];
+
+        return view('users',compact('users'));
     }
 
     public function show($id) {
