@@ -16,19 +16,11 @@ Route::get('/',function(){
    return view('welcome');
 });
 
-Route::get('/usuario',function(){
-    return 'Usuarios';
-});
+Route::get('/usuario','UserController@index');
 
-Route::get('/usuario/{id}',function($id){
-    return "Usuario {$id}";
-})->where('id','[0-9]+');
+Route::get('/usuario/{id}','UserController@show')
+    ->where('id','[0-9]+');
 
-Route::get('/usuario/{nombre}/{apellido?}', function ($nombre, $apellido = null) {
-    if ($apellido) {
-        return "El nombre es {$nombre} {$apellido}";
-    }
-    else {
-        return "El nombre es {$nombre} sin apellido";
-    }
-});
+Route::get('/usuario/crear','UserController@create');
+
+Route::get('/usuario/{nombre}/{apellido?}', 'WelcomeUserController');
