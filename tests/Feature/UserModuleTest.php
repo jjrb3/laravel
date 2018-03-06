@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserModuleTest extends TestCase
 {
+    /*
     public function testUsuarioNombre()
     {
         $this->get('/usuario')
@@ -36,29 +37,29 @@ class UserModuleTest extends TestCase
         $this->get('usuario/Jeremy/Reyes')
             ->assertStatus(200)
             ->assertSee('El nombre es Jeremy Reyes');
-    }
+    }*/
 
     public function testCrearUsuario() {
 
-        /*
+
         $this->post('/usuario/crear',[
-            'name' => 'Jeremy',
+            'name' => '',
             'email' => 'jjrb6@hotmail.com',
             'password' => '123456'
         ])
-            ->assertRedirect('usuario');
+            ->assertSee('El campo nombre es obligatoriosd');
 
-
+        /* Consultar en la DB
         $this->assertDatabaseHas('users',[
             'name' => 'Jeremy',
             'email' => 'jjrb6@hotmail.com',
             //'password' => '123456'
         ]);
         */
-        $this->assertCredentials([
+        /*$this->assertCredentials([
             'name' => 'Jeremy',
             'email' => 'jjrb6@hotmail.com',
             'password' => '123456'
-        ]);
+        ]);*/
     }
 }

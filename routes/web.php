@@ -23,7 +23,7 @@ Route::get('/usuario/{user}','UserController@show')
     ->where('user','[0-9]+')
     ->name('user.show');
 
-Route::post('/usuario/crear','UserController@create')
+Route::post('/usuario','UserController@create')
     ->name('user.create');
 
 Route::get('/usuario/{nombre}/{apellido?}', 'WelcomeUserController');
