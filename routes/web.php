@@ -16,11 +16,14 @@ Route::get('/',function(){
    return view('welcome');
 });
 
-Route::get('/usuario','UserController@index');
+Route::get('/usuario','UserController@index')
+    ->name('users');
 
-Route::get('/usuario/{id}','UserController@show')
-    ->where('id','[0-9]+');
+Route::get('/usuario/{user}','UserController@show')
+    ->where('user','[0-9]+')
+    ->name('user.show');
 
-Route::post('/usuario/crear','UserController@create');
+Route::post('/usuario/crear','UserController@create')
+    ->name('user.create');
 
 Route::get('/usuario/{nombre}/{apellido?}', 'WelcomeUserController');

@@ -9,20 +9,15 @@ class UserController extends Controller
 {
 
     public function index() {
-        $users = [
-            'Jeremy',
-            'Deivis',
-            'Jani',
-            'Alvaro',
-            'Janer',
-            '<script>alert("Click");</script>'
-        ];
+
+        $users = User::all();
 
         return view('users',compact('users'));
     }
 
-    public function show($id) {
-        return "Usuario {$id}";
+    public function show(User $user) {
+
+        return view('detail-user',['user' => $user]);
     }
 
     public function create(Request $request) {

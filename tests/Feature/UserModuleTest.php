@@ -40,6 +40,7 @@ class UserModuleTest extends TestCase
 
     public function testCrearUsuario() {
 
+        /*
         $this->post('/usuario/crear',[
             'name' => 'Jeremy',
             'email' => 'jjrb6@hotmail.com',
@@ -47,7 +48,7 @@ class UserModuleTest extends TestCase
         ])
             ->assertRedirect('usuario');
 
-        /*
+
         $this->assertDatabaseHas('users',[
             'name' => 'Jeremy',
             'email' => 'jjrb6@hotmail.com',
