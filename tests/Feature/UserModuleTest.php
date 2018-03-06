@@ -37,4 +37,27 @@ class UserModuleTest extends TestCase
             ->assertStatus(200)
             ->assertSee('El nombre es Jeremy Reyes');
     }
+
+    public function testCrearUsuario() {
+
+        $this->post('/usuario/crear',[
+            'name' => 'Jeremy',
+            'email' => 'jjrb6@hotmail.com',
+            'password' => '123456'
+        ])
+            ->assertRedirect('usuario');
+
+        /*
+        $this->assertDatabaseHas('users',[
+            'name' => 'Jeremy',
+            'email' => 'jjrb6@hotmail.com',
+            //'password' => '123456'
+        ]);
+        */
+        $this->assertCredentials([
+            'name' => 'Jeremy',
+            'email' => 'jjrb6@hotmail.com',
+            'password' => '123456'
+        ]);
+    }
 }
