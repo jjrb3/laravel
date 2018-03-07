@@ -67,4 +67,66 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function update(User $user) {
+
+        $data = request()->all();
+
+        /*
+         * Busca que el email no exista en la tabla users siendo diferente del id seleccionado
+         * unique:users,email,' . $user->id
+         */
+        $validator = Validator::make($data, [
+            'name' => 'required|string|min:3|max:12',
+            'email' => 'required|string|email|max:50|unique:users,email,' . $user->id,
+            'password' => 'required|string|min:6'
+        ], [
+            'name.required' => 'El campo nombre es obligatorio',
+            'name.min' => 'El nombre debe ser minimo de 3 caracteres',
+            'name.max' => 'El nombre debe ser maximo de 12 caracteres',
+
+            'email.required' => 'El campo email es obligatorio',
+            'email.email' => 'El campo email no es correcto',
+            'email.max' => 'El campo email debe tener maximo 50 caracteres',
+
+            'password.required' => 'El campo password es obligatorio',
+            'password.min' => 'El campo password debe tener minimo 6 caracteres'
+        ]);
+
+        if ($validator->fails()) {
+
+            return response()->json([
+                'resultado' => 0,
+                'titulo' => 'Advertencia',
+                'mensaje' => $validator->messages()->first()
+            ]);
+        }
+
+        try {
+            $data['password'] = bcrypt($data['password']);
+
+            $user->update($data);
+
+            return redirect('usuario');
+        }
+        catch (\Exception $e) {
+
+            return response()->json([
+                'resultado' => -1,
+                'titulo' => 'Error',
+                'mensaje' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function destroy(User $user) {
+
+        try {
+            $user->delete();
+            return redirect('usuario');
+        }
+        catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+    }
 }

@@ -26,4 +26,8 @@ Route::get('/usuario/{user}','UserController@show')
 Route::post('/usuario','UserController@create')
     ->name('user.create');
 
-Route::get('/usuario/{nombre}/{apellido?}', 'WelcomeUserController');
+Route::put('/usuario/{user}','UserController@update')
+    ->name('user.update');
+
+Route::delete('/usuario/{user}','UserController@destroy')
+    ->name('user.destroy');
